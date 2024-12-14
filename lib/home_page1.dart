@@ -8,39 +8,84 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Lista com URLs das imagens
-  final List<String> imageUrls = [
-    'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
-    'https://cryptologos.cc/logos/ethereum-pow-ethw-logo.png',
-    'https://cryptologos.cc/logos/tether-usdt-logo.png',
-    'https://cryptologos.cc/logos/bnb-bnb-logo.png',
-    'https://cdn-icons-png.flaticon.com/512/6001/6001527.png',
-    'https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-usd-coin-usdc-digital-stablecoin-icon-technology-pay-web-vector-png-image_37843734.png',
-    'https://static.vecteezy.com/system/resources/previews/024/093/519/original/xrp-glass-crypto-coin-3d-illustration-free-png.png',
-    'https://upload.wikimedia.org/wikipedia/pt/d/d0/Dogecoin_Logo.png',
-    'https://cdn-icons-png.flaticon.com/512/12114/12114250.png',
+  // Lista com os dados completos das criptomoedas fornecidas
+  final List<Map<String, dynamic>> cryptoData = [
+    {
+      'imageUrl': 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
+      'title': 'Bitcoin',
+      'description': 'Criptomoeda descentralizada',
+      'price': 659.32,
+      'details':
+      'O Bitcoin é a primeira criptomoeda descentralizada criada no mundo. Lançado em 2009, ele usa a tecnologia blockchain para garantir segurança e transparência.'
+    },
+    {
+      'imageUrl': 'https://cryptologos.cc/logos/ethereum-pow-ethw-logo.png',
+      'title': 'Ethereum',
+      'description': 'Plataforma de contratos inteligentes',
+      'price': 400.55,
+      'details':
+      'Ethereum é uma plataforma descentralizada que permite a criação de contratos inteligentes e aplicativos descentralizados (DApps).'
+    },
+    {
+      'imageUrl': 'https://cryptologos.cc/logos/tether-usdt-logo.png',
+      'title': 'Tether',
+      'description': 'Stablecoin atrelada ao dólar',
+      'price': 123.45,
+      'details':
+      'Tether é uma stablecoin que mantém um valor estável, geralmente atrelado ao dólar americano. Ideal para transações digitais seguras.'
+    },
+    {
+      'imageUrl': 'https://cryptologos.cc/logos/bnb-bnb-logo.png',
+      'title': 'BNB',
+      'description': 'Moeda da Binance',
+      'price': 567.89,
+      'details':
+      'BNB é a criptomoeda da Binance, uma das maiores exchanges do mundo. É usada para taxas de transação e outros serviços.'
+    },
+    {
+      'imageUrl': 'https://cdn-icons-png.flaticon.com/512/6001/6001527.png',
+      'title': 'USD Coin',
+      'description': 'Stablecoin regulada',
+      'price': 789.10,
+      'details':
+      'USD Coin (USDC) é uma stablecoin regulada que está atrelada ao dólar americano. Amplamente usada em transações financeiras.'
+    },
+    {
+      'imageUrl':
+      'https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-usd-coin-usdc-digital-stablecoin-icon-technology-pay-web-vector-png-image_37843734.png',
+      'title': 'Ripple',
+      'description': 'Protocolo de pagamento',
+      'price': 234.56,
+      'details':
+      'Ripple (XRP) é uma criptomoeda projetada para facilitar pagamentos internacionais de forma rápida e com baixo custo.'
+    },
+    {
+      'imageUrl':
+      'https://static.vecteezy.com/system/resources/previews/024/093/519/original/xrp-glass-crypto-coin-3d-illustration-free-png.png',
+      'title': 'Cardano',
+      'description': 'Blockchain sustentável',
+      'price': 345.67,
+      'details':
+      'Cardano (ADA) é uma plataforma de blockchain que utiliza o algoritmo Proof of Stake (PoS), sendo uma das mais sustentáveis.'
+    },
+    {
+      'imageUrl':
+      'https://upload.wikimedia.org/wikipedia/pt/d/d0/Dogecoin_Logo.png',
+      'title': 'Dogecoin',
+      'description': 'Moeda meme famosa',
+      'price': 456.78,
+      'details':
+      'Dogecoin começou como uma piada, mas rapidamente se tornou uma das criptomoedas mais populares, especialmente graças ao apoio da comunidade.'
+    },
+    {
+      'imageUrl': 'https://cdn-icons-png.flaticon.com/512/12114/12114250.png',
+      'title': 'Polkadot',
+      'description': 'Rede de blockchain interoperável',
+      'price': 567.89,
+      'details':
+      'Polkadot (DOT) é uma rede que conecta diferentes blockchains, permitindo que elas trabalhem juntas de forma segura e escalável.'
+    },
   ];
-
-  // Lista com os preços correspondentes
-  final List<double> prices = [
-    659.32, 400.55, 123.45, 567.89, 789.10, 234.56, 345.67, 456.78, 567.89
-  ];
-
-  // Lista de títulos
-  final List<String> titles = [
-    'Bitcoin', 'Ethereum', 'Tether', 'BNB', 'USD Coin',
-    'Ripple', 'Cardano', 'Dogecoin', 'Polkadot'
-  ];
-
-  // Lista de descrições
-  final List<String> descriptions = [
-    'Criptomoeda descentralizada', 'Plataforma de contratos inteligentes',
-    'Stablecoin atrelada ao dólar', 'Moeda da Binance',
-    'Stablecoin regulada', 'Protocolo de pagamento',
-    'Blockchain sustentável', 'Moeda meme famosa',
-    'Rede de blockchain interoperável'
-  ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +100,19 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       body: ListView.builder(
-        itemCount: imageUrls.length,
+        itemCount: cryptoData.length,
         itemBuilder: (context, index) {
+          final crypto = cryptoData[index];
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: GestureDetector( onTap: () {
-              Navigator.pushNamed(context, '/homePage2', arguments: [imageUrls, titles, descriptions]);
-            },
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  '/homePage2',
+                  arguments: crypto,
+                );
+              },
               child: Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -82,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       children: [
                         Image.network(
-                          imageUrls[index],
+                          crypto['imageUrl'],
                           width: 50,
                           height: 50,
                         ),
@@ -91,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              titles[index],
+                              crypto['title'],
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -99,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             SizedBox(height: 8),
                             Text(
-                              descriptions[index],
+                              crypto['description'],
                               style: TextStyle(fontSize: 14),
                             ),
                           ],
@@ -107,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     Text(
-                      'R\$${prices[index].toStringAsFixed(2)}',
+                      'R\$${crypto['price'].toStringAsFixed(2)}',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
